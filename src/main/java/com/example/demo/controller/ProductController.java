@@ -19,29 +19,32 @@ public class ProductController {
 
 	@Autowired
 	private ProductService service;
-	
-	 @GetMapping
-	    public APIResponse<List<Product>> getProducts() {
-	        List<Product> allProducts = service.findAllProducts();
-	        return new APIResponse<>(allProducts.size(), allProducts);
-	    }
 
-	    @GetMapping("/{field}")
-	    private APIResponse<List<Product>> getProductsWithSort(@PathVariable String field) {
-	        List<Product> allProducts = service.findProductsWithSorting(field);
-	        return new APIResponse<>(allProducts.size(), allProducts);
-	    }
+	@GetMapping
+	public APIResponse<List<Product>> getProducts() {
+		List<Product> allProducts = service.findAllProducts();
+		return new APIResponse<>(allProducts.size(), allProducts);
+	}
 
-	    @GetMapping("/pagination/{offset}/{pageSize}")
-	    private APIResponse<Page<Product>> getProductsWithPagination(@PathVariable int offset, @PathVariable int pageSize) {
-	        Page<Product> productsWithPagination = service.findProductsWithPagination(offset, pageSize);
-	        return new APIResponse<>(productsWithPagination.getSize(), productsWithPagination);
-	    }
+	@GetMapping("/{field}")
+	private APIResponse<List<Product>> getProductsWithSort(@PathVariable String field) {
+		List<Product> allProducts = service.findProductsWithSorting(field);
+		System.out.println(allProducts);
+		return new APIResponse<>(allProducts.size(), allProducts);
+	}
 
-	    @GetMapping("/paginationAndSort/{offset}/{pageSize}/{field}")
-	    private APIResponse<Page<Product>> getProductsWithPaginationAndSort(@PathVariable int offset, @PathVariable int pageSize,@PathVariable String field) {
-	        Page<Product> productsWithPagination = service.findProductsWithPaginationAndSorting(offset, pageSize, field);
-	        return new APIResponse<>(productsWithPagination.getSize(), productsWithPagination);
-	    }
+	@GetMapping("/pagination/{offset}/{pageSize}")
+	private APIResponse<Page<Product>> getProductsWithPagination(@PathVariable int offset, @PathVariable int pageSize) {
+		Page<Product> productsWithPagination = service.findProductsWithPagination(offset, pageSize);
+		System.out.println(productsWithPagination);
+		return new APIResponse<>(productsWithPagination.getSize(), productsWithPagination);
+	}
+
+	@GetMapping("/paginationAndSort/{offset}/{pageSize}/{field}")
+	private APIResponse<Page<Product>> getProductsWithPaginationAndSort(@PathVariable int offset,
+			@PathVariable int pageSize, @PathVariable String field) {
+		Page<Product> productsWithPagination = service.findProductsWithPaginationAndSorting(offset, pageSize, field);
+		return new APIResponse<>(productsWithPagination.getSize(), productsWithPagination);
+	}
 
 }
