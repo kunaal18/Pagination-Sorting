@@ -28,8 +28,8 @@ public class ProductServiceImple implements ProductService {
 
 	@Override
 	public List<Product> findAllProducts() {
-
-		return repository.findAll();
+		List<Product> findAll = repository.findAll();
+		return findAll;
 	}
 
 	@Override
@@ -48,8 +48,8 @@ public class ProductServiceImple implements ProductService {
 
 	@Override
 	public Page<Product> findProductsWithPaginationAndSorting(int offset, int pageSize, String field) {
-
-		return repository.findAll(PageRequest.of(offset, pageSize, Sort.by(field)));
+		Page<Product> findAll = repository.findAll(PageRequest.of(offset, pageSize, Sort.by(field)));
+		return findAll;
 	}
 
 }
